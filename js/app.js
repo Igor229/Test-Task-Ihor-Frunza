@@ -51,51 +51,155 @@ function getCart() {
 
 // write all Elements
 function addElements() {
-	document.querySelector('.products-box').innerHTML = ``
 
 	for (key in productsArr) {
-	let prd = document.createElement('div')
-	prd.innerHTML = `<div class="product-box__item">
-                    <h3 class="product-box__title">${productsArr[key].name}</h3>
-                    <div class="product-box__img">
-                        <img class="img-fluid" src="${productsArr[key].imageURL}">
-                    </div>
-                    <div class="product-box__meta" data-id="prise">
-                        <p>${productsArr[key].price} грн.</p>
-                        <div class="qty">
-                            <input class="qty__item" type="number" id="${productsArr[key].inputID}"> Кол
-                        </div>
-                        <button class="product-box__btn" onclick="getCart()"" id="${productsArr[key].id}" ${productsArr[key].category}>Добавить</button>
+		//Create DOM elements and set attribute for div
+ 		const prd = document.createElement('div')
+ 		prd.setAttribute('class', 'products-box')
+ 		prd.setAttribute('class', 'grid-box')
 
-                    </div>
-                </div>`
+ 		//Create DOM elements and set attribute for div
+		const prdBox = document.createElement('div')
+		prdBox.setAttribute('class', 'product-box__item')
 
-    document.querySelector('.products-box').appendChild(prd)
+		//Create title element and set attribute
+		const prdTitle = document.createElement('h3')
+		prdTitle.setAttribute('calss', 'product-box__title')
+
+		//add text for title
+		const prdTitleText = document.createTextNode(productsArr[key].name)
+
+		//Create DOM element and set attribute for div
+		const prdBoxImg = document.createElement('div')
+		prdBoxImg.setAttribute('class', 'product-box__img')
+
+		//Create image element and set attributes
+		const prdImg = document.createElement('img')
+		prdImg.setAttribute('src', productsArr[key].imageURL)
+		prdImg.setAttribute('class', 'img-fluid')
+
+		//Create price element and set attribute for div
+		const prdBoxPrice = document.createElement('div')
+		prdBoxPrice.setAttribute('class', 'product-box__meta')
+
+		//Create price elements, set attribute for p tag and add price
+		const price = document.createElement('p')
+		const priceText = document.createTextNode(productsArr[key].price)
+
+		//Create DOM element and set attribute for div
+		const prdQty = document.createElement('div')
+		prdQty.setAttribute('class', 'qty')
+
+		const qtyInput = document.createElement('input')
+		qtyInput.setAttribute('class', 'qty__item')
+		qtyInput.setAttribute('type', 'number')
+		qtyInput.setAttribute('id', productsArr[key].inputID)
+
+		const inputText = document.createTextNode('Кол')
+
+		const prdBtn = document.createElement('button')
+		prdBtn.setAttribute('class', 'product-box__btn')
+		prdBtn.setAttribute('id', productsArr[key].id)
+		prdBtn.setAttribute('onclick', 'getCart()')
+		prdBtn.setAttribute('category-filter', productsArr[key].category)
+		const btnText = document.createTextNode('Добавить')
+
+
+		//Append elements
+		prdBtn.appendChild(btnText)
+		prdQty.appendChild(qtyInput)
+		prdQty.appendChild(inputText)
+		price.appendChild(priceText)
+
+		prdBoxPrice.appendChild(price)
+		prdBoxPrice.appendChild(qtyInput)
+		prdBoxPrice.appendChild(prdQty)
+		prdBoxPrice.appendChild(prdBtn)
+
+		prdBoxImg.appendChild(prdImg)
+		prdTitle.appendChild(prdTitleText)
+
+		prdBox.appendChild(prdTitle)
+		prdBox.appendChild(prdBoxImg)
+		prdBox.appendChild(prdBoxPrice)
+		prd.appendChild(prdBox)
+
+		//generating document
+		document.querySelector('.products-box').appendChild(prd)
+
+
 	}
 }
 // writre only Breakfests
 function addBreakfests() {
 
-	document.querySelector('.products-box').innerHTML = ``
-
 		for (key in breakfests) {
-	let prd = document.createElement('div')
-	prd.innerHTML = `<div class="product-box__item">
-                    <h3 class="product-box__title">${breakfests[key].name}</h3>
-                    <div class="product-box__img">
-                        <img class="img-fluid" src="${breakfests[key].imageURL}">
-                    </div>
-                    <div class="product-box__meta" data-id="prise">
-                        <p>${breakfests[key].price} грн.</p>
-                        <div class="qty">
-                            <input class="qty__item" type="number" id="${breakfests[key].inputID}"> Кол
-                        </div>
-                        <button class="product-box__btn" onclick="getCart()" id="${breakfests[key].id}" ${breakfests[key].category}>Добавить</button>
 
-                    </div>
-                </div>`
+		const prd = document.createElement('div')
+ 		prd.setAttribute('class', 'products-box')
+ 		prd.setAttribute('class', 'grid-box')
 
-    document.querySelector('.products-box').appendChild(prd)
+		const prdBox = document.createElement('div')
+		prdBox.setAttribute('class', 'product-box__item')
+
+		const prdTitle = document.createElement('h3')
+		prdTitle.setAttribute('calss', 'product-box__title')
+
+		const prdTitleText = document.createTextNode(breakfests[key].name)
+
+		const prdBoxImg = document.createElement('div')
+		prdBoxImg.setAttribute('class', 'product-box__img')
+
+		const prdImg = document.createElement('img')
+		prdImg.setAttribute('src', breakfests[key].imageURL)
+		prdImg.setAttribute('class', 'img-fluid')
+
+		const prdBoxPrice = document.createElement('div')
+		prdBoxPrice.setAttribute('class', 'product-box__meta')
+
+		const price = document.createElement('p')
+		const priceText = document.createTextNode(breakfests[key].price)
+
+		const prdQty = document.createElement('div')
+		prdQty.setAttribute('class', 'qty')
+
+		const qtyInput = document.createElement('input')
+		qtyInput.setAttribute('class', 'qty__item')
+		qtyInput.setAttribute('type', 'number')
+		qtyInput.setAttribute('id', breakfests[key].inputID)
+
+		const inputText = document.createTextNode('Кол')
+
+		const prdBtn = document.createElement('button')
+		prdBtn.setAttribute('class', 'product-box__btn')
+		prdBtn.setAttribute('id', breakfests[key].id)
+		prdBtn.setAttribute('onclick', 'getCart()')
+		prdBtn.setAttribute('category-filter', breakfests[key].category)
+		const btnText = document.createTextNode('Добавить')
+
+
+		prdBtn.appendChild(btnText)
+		prdQty.appendChild(qtyInput)
+		prdQty.appendChild(inputText)
+		price.appendChild(priceText)
+
+		prdBoxPrice.appendChild(price)
+		prdBoxPrice.appendChild(qtyInput)
+		prdBoxPrice.appendChild(prdQty)
+		prdBoxPrice.appendChild(prdBtn)
+
+		prdBoxImg.appendChild(prdImg)
+		prdTitle.appendChild(prdTitleText)
+
+		prdBox.appendChild(prdTitle)
+		prdBox.appendChild(prdBoxImg)
+		prdBox.appendChild(prdBoxPrice)
+		prd.appendChild(prdBox)
+
+		document.querySelector('.products-box').appendChild(prd)
+
+
+
 	}
 }
 
