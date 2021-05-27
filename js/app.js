@@ -1,13 +1,13 @@
 
 
 // write all Elements
-function addElements() {
+document.addEventListener("DOMContentLoaded", () => {
 
+	const productsContainer = document.getElementById('products')
+	const secondContainer = document.createElement('div')
+	secondContainer.setAttribute('class', 'products-box grid-box')
+	secondContainer.setAttribute('id', 'products')
 	for (key in productsArr) {
-		//Create DOM elements and set attribute for div
- 		const prd = document.createElement('div')
- 		prd.setAttribute('class', 'grid-box')
- 		prd.setAttribute('class', 'products-box')
 
  		//Create DOM elements and set attribute for div
 		const prdBox = document.createElement('div')
@@ -50,8 +50,7 @@ function addElements() {
 		const prdBtn = document.createElement('button')
 		prdBtn.setAttribute('class', 'product-box__btn')
 		prdBtn.setAttribute('id', productsArr[key].id)
-		prdBtn.setAttribute('onclick', 'getCart()')
-		prdBtn.setAttribute('category-filter', productsArr[key].category)
+		prdBtn.setAttribute('category', productsArr[key].category)
 		const btnText = document.createTextNode('Добавить')
 
 
@@ -69,16 +68,10 @@ function addElements() {
 		prdBoxImg.appendChild(prdImg)
 		prdTitle.appendChild(prdTitleText)
 
-		prd.appendChild(prdBox)
 		prdBox.appendChild(prdTitle)
 		prdBox.appendChild(prdBoxImg)
 		prdBox.appendChild(prdBoxPrice)
-
-		//generating document
-		document.querySelector('.products-box').appendChild(prd)
-
-
+		secondContainer.appendChild(prdBox)
 	}
-}
-
-addElements()
+	productsContainer.replaceWith(secondContainer)
+}) 

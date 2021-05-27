@@ -5,7 +5,7 @@ let productsArr = [
 	name: "Овсяная каша с фруктами",
 	price: 25,
 	imageURL: "i/im1.jpg",
-	category: "breakfast"
+	category: 2
 },
 
 {
@@ -13,7 +13,7 @@ let productsArr = [
 	name: "Яичница глазунья с овощами на сковородке",
 	price: 25,
 	imageURL: "i/im2.jpg",
-	category: "breakfast"
+	category: 2
 },
 
 {
@@ -21,7 +21,7 @@ let productsArr = [
 	name: "Сет азербайджанский завтрак",
 	price: 30,
 	imageURL: "i/im3.jpg",
-	category: "breakfast"
+	category: 2
 },
 
 {
@@ -29,7 +29,7 @@ let productsArr = [
 	name: "Яичница с помидорами по-бакински",
 	price: 45,
 	imageURL: "i/im4.jpg",
-	category: "sideDishes"
+	category: 3
 },
 
 {
@@ -37,7 +37,7 @@ let productsArr = [
 	name: "Сырники со сметаной",
 	price: 45,
 	imageURL: "i/im5.jpg",
-	category: "breakfast"
+	category: 2
 },
 
 {
@@ -45,7 +45,7 @@ let productsArr = [
 	name: "Шпинатный крем-суп",
 	price: 50,
 	imageURL: "i/im6.jpg",
-	category: "firstMeal"
+	category: 1
 },
 
 {
@@ -53,7 +53,7 @@ let productsArr = [
 	name: "Суп Пити",
 	price: 85,
 	imageURL: "i/im7.jpg",
-	category: "firstMeal"
+	category: 1
 },
 
 {
@@ -61,7 +61,7 @@ let productsArr = [
 	name: "Борщ украинский",
 	price: 95,
 	imageURL: "i/im8.jpg",
-	category: "firstMeal"
+	category: 1
 },
 
 {
@@ -69,7 +69,7 @@ let productsArr = [
 	name: "Суп Кюфта Бозбаш",
 	price: 100,
 	imageURL: "i/im9.jpg",
-	category: "firstMeal"
+	category: 1
 },
 
 {
@@ -77,7 +77,7 @@ let productsArr = [
 	name: "Картофель фри",
 	price: 125,
 	imageURL: "i/im10.jpg",
-	category: "sideDishes"
+	category: 3
 },
 
 {
@@ -85,7 +85,7 @@ let productsArr = [
 	name: "Картофель по-домашнему",
 	price: 135,
 	imageURL: "i/im11.jpg",
-	category: "sideDishes"
+	category: 3
 },
 
 {
@@ -93,7 +93,7 @@ let productsArr = [
 	name: "Рис с овощами",
 	price: 150,
 	imageURL: "i/im12.jpg",
-	category: "sideDishes"
+	category: 3
 },
 
 ]
