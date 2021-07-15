@@ -2,7 +2,6 @@
 
 // write all Elements
 document.addEventListener("DOMContentLoaded", () => {
-
 	const productsContainer = document.getElementById('products')
 	const secondContainer = document.createElement('div')
 	secondContainer.setAttribute('class', 'products-box grid-box')
@@ -12,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
  		//Create DOM elements and set attribute for div
 		const prdBox = document.createElement('div')
 		prdBox.setAttribute('class', 'product-box__item')
+		prdBox.setAttribute('id', productsArr[key].id)
+		prdBox.setAttribute('category', productsArr[key].category)
+ 		
 
 		//Create title element and set attribute
 		const prdTitle = document.createElement('h3')
@@ -40,19 +42,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		//Create DOM element and set attribute for div
 		const prdQty = document.createElement('div')
 		prdQty.setAttribute('class', 'qty')
+		const inputText = document.createTextNode('Кол')
 
 		const qtyInput = document.createElement('input')
 		qtyInput.setAttribute('class', 'qty__item')
 		qtyInput.setAttribute('type', 'number')
+		qtyInput.setAttribute('value', '0')
 
-		const inputText = document.createTextNode('Кол')
 
 		const prdBtn = document.createElement('button')
 		prdBtn.setAttribute('class', 'product-box__btn')
-		prdBtn.setAttribute('id', productsArr[key].id)
-		prdBtn.setAttribute('category', productsArr[key].category)
+		prdBtn.addEventListener('click', addToCart)
 		const btnText = document.createTextNode('Добавить')
-
 
 		//Append elements
 		prdBtn.appendChild(btnText)
@@ -72,6 +73,37 @@ document.addEventListener("DOMContentLoaded", () => {
 		prdBox.appendChild(prdBoxImg)
 		prdBox.appendChild(prdBoxPrice)
 		secondContainer.appendChild(prdBox)
+
 	}
 	productsContainer.replaceWith(secondContainer)
-}) 
+
+// ============ Add the value to the cart and get the product ID ===========
+		function addToCart(event) {
+			const button = event.target
+			const productId = parseInt(button.closest('.product-box__item').id)
+			const numOfItems = parseInt(button.closest('.product-box__meta').childNodes[1].value)
+			const obj = {productsNum: numOfItems, id: productId}
+			const item = cart.find(e => e.id === obj.id)
+			if (item){
+				item.productsNum = item.productsNum + obj.productsNum
+			} else {
+				cart.push(obj)
+			}
+
+// ============ Get the total values of the Cart ==================
+
+		const totalValue = cart.reduce((acum, elem) => {
+			const product = productsArr.find(e => e.id === elem.id)
+			if (!product){
+				return acum
+			}
+			return {
+				totalNum: acum.totalNum + elem.productsNum,
+				totalPrice: (product.price * elem.productsNum) + acum.totalPrice
+			}
+		},{totalNum: 0, totalPrice: 0})
+		
+			document.getElementById('numOfItems').innerHTML = totalValue.totalNum
+			document.getElementById('totalPrice').innerHTML = totalValue.totalPrice
+		}
+})

@@ -14,5 +14,3 @@ const categoriesArr = [
 		name: 'sideDishes'
 	}
 ]
-
-console.log(categoriesArr)
