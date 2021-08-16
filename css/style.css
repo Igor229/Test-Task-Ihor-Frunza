@@ -158,6 +158,8 @@ h1, h2, h3 {
 }
 .btn-check-box {
     padding: 1rem 0;
+    font-size: 1rem;
+    font-family: 'Ubuntu', sans-serif;
 }
 .btn-check {
     padding: 5px 12px;
@@ -242,3 +244,13 @@ h1, h2, h3 {
 }
 .popup__text{}
 
+.confirm_input{
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 240px;
+    height: 30px;
+}
+
+.btn-confirm{
+    margin-top: 10px;
+}

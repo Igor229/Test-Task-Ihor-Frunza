@@ -181,14 +181,17 @@ function openPopup(event){
 	btnCheck.addEventListener('click', () => {
 		if (!userName.value){
 			userName.style.border = '2px solid red'
-			alert('shit')
+			alert("Введіть ваше ім'я")
+			return false
 		}
 
 		if (!userEmail.value){
 			userEmail.style.border = '2px solid red'
-			alert('shit')
+			alert('Введіть ваш Email')
+			return false
 		}
-		alert('finally')
+		alert('Дякуємо за ваше замовлення')
+		popup.classList.remove('open')
 	})
 }
 
