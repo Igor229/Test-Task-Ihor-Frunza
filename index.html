@@ -22,7 +22,7 @@
                 <span class="top-cart-info__item">
                      Товаров в корзине - <span class="red-info", id="numOfItems">XXX</span>,
                       на сумму <span class="red-info" id="totalPrice">XXX</span> грн</span>
-                <button class="btn-check">Оформить заказ</button>
+                <a class="popup-link" href="#popup"><button class="btn-check">Оформить заказ</button></a>
             </div>
         </div><!-- /.top-cart-info -->
 
@@ -66,6 +66,22 @@
             </div><!-- /product-box -->
 
         </section>
+    </div>
+
+    <div class="popup" id="popup">
+        <div class="popup__body">
+            <div class="popup__content">
+                 <a href="" class="popup__close">X</a>
+                 <div class="popup__title">Модальне Вікно твою мать</div>
+                 <div class="popup__text">
+                    <form action="" id="confirmForm">
+                        <input type="text" id="userName">
+                        <input type="text" id="userEmail">
+                        <button class="btn-confirm" type="submit" id="btn-confirm">Отправить</button>
+                    </form>
+                 </div>
+            </div>
+        </div>
     </div>
 
     <footer class="bottom-footer bg-beetroot py-1">

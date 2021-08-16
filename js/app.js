@@ -1,23 +1,29 @@
 
 
 // write all Elements
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",  () => {
+	renderItems(productsArr)
+	getCategoryAndPrice()
+	openPopup()
+})
+
+
+function renderItems(productsArr){
 	const productsContainer = document.getElementById('products')
 	const secondContainer = document.createElement('div')
 	secondContainer.setAttribute('class', 'products-box grid-box')
 	secondContainer.setAttribute('id', 'products')
-	for (key in productsArr) {
 
- 		//Create DOM elements and set attribute for div
+	for (key in productsArr) {
+	 	//Create DOM elements and set attribute for div
 		const prdBox = document.createElement('div')
 		prdBox.setAttribute('class', 'product-box__item')
 		prdBox.setAttribute('id', productsArr[key].id)
 		prdBox.setAttribute('category', productsArr[key].category)
- 		
-
+	 		
 		//Create title element and set attribute
 		const prdTitle = document.createElement('h3')
-		prdTitle.setAttribute('calss', 'product-box__title')
+		prdTitle.setAttribute('class', 'product-box__title')
 
 		//add text for title
 		const prdTitleText = document.createTextNode(productsArr[key].name)
@@ -73,37 +79,116 @@ document.addEventListener("DOMContentLoaded", () => {
 		prdBox.appendChild(prdBoxImg)
 		prdBox.appendChild(prdBoxPrice)
 		secondContainer.appendChild(prdBox)
-
 	}
 	productsContainer.replaceWith(secondContainer)
+}
+
+// ============ category filter =================
+function getCategoryAndPrice(event){
+	let catArr = []
+	let priceArr = []
+	const getCategory = document.getElementById('category-filter')
+	getCategory.addEventListener('change', (event) => {
+
+	//clear elements
+	document.querySelectorAll('.product-box__item').forEach(e => e.remove())
+
+	//filter array
+	catArr = productsArr.filter(element => {
+		return element.category == event.target.value
+	})
+	if (event.target.value === "0"){
+		renderItems(productsArr)
+	}else{
+		renderItems(catArr)
+	}
+})
+
+
+	// ============= price filter ================
+	const getPrice = document.getElementById('price-filter')
+	getPrice.addEventListener('change', (event) => {
+		if(event.target.value == "0"){
+			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
+			if (catArr.length == 0){
+				renderItems(productsArr)
+			}else{
+				renderItems(catArr)
+			}
+		}else if (getCategory.value != 0){
+			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
+			priceArr = catArr.filter(element => {
+				return element.price <= event.target.value
+			})
+			renderItems(priceArr)
+		}else{
+			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
+			priceArr = productsArr.filter(element => {
+				return element.price <= event.target.value
+			})
+			renderItems(priceArr)
+		}
+	})
+}
+
+
+
 
 // ============ Add the value to the cart and get the product ID ===========
-		function addToCart(event) {
-			const button = event.target
-			const productId = parseInt(button.closest('.product-box__item').id)
-			const numOfItems = parseInt(button.closest('.product-box__meta').childNodes[1].value)
-			const obj = {productsNum: numOfItems, id: productId}
-			const item = cart.find(e => e.id === obj.id)
-			if (item){
-				item.productsNum = item.productsNum + obj.productsNum
-			} else {
-				cart.push(obj)
-			}
+function addToCart(event) {
+	const button = event.target
+	const productId = parseInt(button.closest('.product-box__item').id)
+	const numOfItems = parseInt(button.closest('.product-box__meta').childNodes[1].value)
+	const obj = {productsNum: numOfItems, id: productId}
+	const item = cart.find(e => e.id === obj.id)
 
+	if (item){
+		item.productsNum = item.productsNum + obj.productsNum
+	} else {
+		cart.push(obj)
+	}
 // ============ Get the total values of the Cart ==================
 
-		const totalValue = cart.reduce((acum, elem) => {
-			const product = productsArr.find(e => e.id === elem.id)
-			if (!product){
-				return acum
-			}
-			return {
-				totalNum: acum.totalNum + elem.productsNum,
-				totalPrice: (product.price * elem.productsNum) + acum.totalPrice
-			}
-		},{totalNum: 0, totalPrice: 0})
-		
-			document.getElementById('numOfItems').innerHTML = totalValue.totalNum
-			document.getElementById('totalPrice').innerHTML = totalValue.totalPrice
+	const totalValue = cart.reduce((acum, elem) => {
+	const product = productsArr.find(e => e.id === elem.id)
+
+	if (!product){
+		return acum
+	}
+		return {
+			totalNum: acum.totalNum + elem.productsNum,
+			totalPrice: (product.price * elem.productsNum) + acum.totalPrice
 		}
-})
+	},{totalNum: 0, totalPrice: 0})
+		
+	document.getElementById('numOfItems').innerHTML = totalValue.totalNum
+	document.getElementById('totalPrice').innerHTML = totalValue.totalPrice
+}
+
+
+
+function openPopup(event){
+	const popupLink = document.querySelector('.popup-link')
+	const popup = document.querySelector('.popup')
+	const btnCheck = document.getElementById('btn-confirm')
+	const userName = document.getElementById('userName')
+	const userEmail = document.getElementById('userEmail')
+
+	popupLink.addEventListener('click', () => {
+		popup.classList.add('open')
+	})
+
+	btnCheck.addEventListener('click', () => {
+		if (!userName.value){
+			userName.style.border = '2px solid red'
+			alert('shit')
+		}
+
+		if (!userEmail.value){
+			userEmail.style.border = '2px solid red'
+			alert('shit')
+		}
+		alert('finally')
+	})
+}
+
