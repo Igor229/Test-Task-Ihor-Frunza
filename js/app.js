@@ -3,7 +3,8 @@
 // write all Elements
 document.addEventListener("DOMContentLoaded",  () => {
 	renderItems(productsArr)
-	getCategoryAndPrice()
+	getCategory()
+	getPrice()
 	openPopup()
 })
 
@@ -83,53 +84,42 @@ function renderItems(productsArr){
 	productsContainer.replaceWith(secondContainer)
 }
 
-// ============ category filter =================
-function getCategoryAndPrice(event){
-	let catArr = []
-	let priceArr = []
+function getCategory(event){
 	const getCategory = document.getElementById('category-filter')
+	let categoryArr = []
+
 	getCategory.addEventListener('change', (event) => {
+		document.querySelectorAll('.product-box__item').forEach(e => e.remove())
 
-	//clear elements
-	document.querySelectorAll('.product-box__item').forEach(e => e.remove())
-
-	//filter array
-	catArr = productsArr.filter(element => {
-		return element.category == event.target.value
-	})
-	if (event.target.value === "0"){
-		renderItems(productsArr)
-	}else{
-		renderItems(catArr)
-	}
-})
-
-
-	// ============= price filter ================
-	const getPrice = document.getElementById('price-filter')
-	getPrice.addEventListener('change', (event) => {
-		if(event.target.value == "0"){
-			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
-			if (catArr.length == 0){
-				renderItems(productsArr)
-			}else{
-				renderItems(catArr)
-			}
-		}else if (getCategory.value != 0){
-			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
-			priceArr = catArr.filter(element => {
-				return element.price <= event.target.value
-			})
-			renderItems(priceArr)
+		categoryArr = productsArr.filter(element => {
+			return element.category == event.target.value
+		})
+		if (event.target.value === "0"){
+			renderItems(productsArr)
 		}else{
-			document.querySelectorAll('.product-box__item').forEach(e => e.remove())
-			priceArr = productsArr.filter(element => {
-				return element.price <= event.target.value
-			})
+			renderItems(categoryArr)
+		}
+	})
+}
+
+function getPrice(event){
+	const getPrice = document.getElementById('price-filter')
+	let priceArr = []
+
+	getPrice.addEventListener('change', (event) => {
+		document.querySelectorAll('.product-box__item').forEach(e => e.remove())
+
+		priceArr = productsArr.filter(element => {
+			return element.price <= event.target.value
+		})
+		if (event.target.value === "0"){
+			renderItems(productsArr)
+		}else{
 			renderItems(priceArr)
 		}
 	})
 }
+
 
 
 
